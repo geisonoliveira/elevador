@@ -2,24 +2,25 @@
 import { createInterface } from "readline";
 
 // cria a interface para usar a entrada e saída do terminal
-const rl = createInterface({
+const inputUser = createInterface({
 	input: process.stdin,
 	output: process.stdout,
 	terminal: false
 });
 
-const andarInicial : Number = 0;
+const andarInicial : Number = 1;
 const andarFinal : Number = 15;
 
-function escolha() {
+function choose() {
     // faz a pergunta para o usuáio (input, entrada)
-    rl.question('Elevador: Digite o andar desejado: ', (andarStr : string) => {
+    inputUser.question('Elevador: Digite o andar desejado: ', (andarStr : string) => {
 
         const andarNum = Number(andarStr);
         
         // Se o andarNum for NaN, o sistema deverá ignorar
         if (isNaN(andarNum)) {
-            escolha();
+            console.log('Você não digitou um número, digite por favor um número: ');
+            choose();
         } else {
             // Se o número digitado estiver fora do limite
             // deverá ser exibida uma mensagem
@@ -31,10 +32,10 @@ function escolha() {
                 console.log(`Andar escolhido: ${andarNum}`);
             }
 
-            escolha();
+            choose();
         }
     });
 }
 
 // Função recursiva
-escolha();
+choose();
